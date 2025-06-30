@@ -12,6 +12,8 @@ pipeline {
         nexusUrl = 'nexus.guru97s.cloud:8081'
         region = 'us-east-1'
         account_id = '637423540068'
+        AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
     }
     stages {
         stage('Read The Version'){
@@ -56,7 +58,7 @@ pipeline {
             }
         }
     }
-        // stage('Nexus Artifact Uploader'){ // uploading the backend zip to the nexus repository(backend)
+        // stage('Nexus Artifact Uploader'){ // uploading the back zip to the nexus repository(backend)
         //     steps {
         //         script {
         //             nexusArtifactUploader(
@@ -103,3 +105,14 @@ pipeline {
         }
       }
 }
+
+//If you want to store aws credentila in the Jenkins, use Jenkins Credentials Manager
+//This allows you to inject credentials into your jobs without exposing them in logs or the Jenkinsfile.
+//Use the below code in the 
+/*steps{
+            withAWS(region: 'us-east-1', credentials: "aws-creds-${environment}") {
+            sh """
+            
+            """
+
+            } /.
