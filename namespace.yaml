@@ -1,0 +1,7 @@
+kind: Namespace
+apiVersion: v1
+metadata: 
+  name: lab-exercise
+  labels:
+    name: lab-exercise
+    environment: dev

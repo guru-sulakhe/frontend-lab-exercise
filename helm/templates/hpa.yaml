@@ -1,0 +1,23 @@
+#Horizontal Pod Autoscaling is used to create new nodes based on the cpu utilization of each node
+#Horizontal Pod Autoscaler should be attached to the deployment 
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: frontend
+  namespace: lab-exercise
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment #your frontend type
+    name: frontend #your deployment name
+  minReplicas: "{{ .Values.hpa.minReplicas }}"
+  maxReplicas: "{{ .Values.hpa.maxReplicas }}"
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization #if averageUtilization of server shoud less than 50 or else it will create new pod
+        averageUtilization: "{{ .Values.hpa.cpuUtilization }}"
+
+# $ kubectl get hpa -n lab-exercise

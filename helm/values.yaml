@@ -1,0 +1,9 @@
+deployment:
+  replicas: 2
+  imageVersion: IMAGE_VERSION
+  imageURL: 637423540068.dkr.ecr.us-east-1.amazonaws.com/lab-exercise/dev/frontend
+hpa:
+  cpuUtilization: 15
+  minReplicas: 5
+  maxReplicas: 10
+
