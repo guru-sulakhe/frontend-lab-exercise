@@ -8,3 +8,5 @@ hpa:
   maxReplicas: 10
 ingress:
   portNumber: 80
+#tgb: #target group binding
+  #arn: arn:aws:elasticloadbalancing:us-east-1:315069654700:targetgroup/roboshop-dev/5b208a7c17721cb9 #your target group ARN
