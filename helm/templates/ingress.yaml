@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: frontend-ingress
+  namespace: lab-exercise
   annotations: #Application Load Balancer will be created based on the annotations in AWS
     alb.ingress.kubernetes.io/scheme: internet-facing
     kubernetes.io/ingress.class: alb
@@ -21,10 +22,11 @@ spec:
           service:
             name: frontend #ALB Target Group, your service name
             port:
-              number: 80
+              number: "{{ .Values.ingress.portNumber }}"
 # here Annotations are used in Ingress in order to create external resource in AWS i,.e ALB(Application Load Balancer)
 # $ kubectl get pods -n kube-system
 # $ kubectl logs <aws-load-balancer-controller-66578vd711-l7epd> -n kube-system
 # $ kubectl get svc
 # $ kubectl get ingress
 # $ kubectl describe <ingress-name>
+# Before accessing frontend application in the browser make sure that the Route 53 record created for Application Load Balancer with record name: *.guru97s.cloud,type: CNAME,select Alias to Application and Class Load Balancer,us-east-1,in load balancer select Application Load Balancer which is recently created by Kubernetes Cluster 

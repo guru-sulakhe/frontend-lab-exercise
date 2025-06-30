@@ -6,4 +6,5 @@ hpa:
   cpuUtilization: 15
   minReplicas: 5
   maxReplicas: 10
-
+ingress:
+  portNumber: 80
